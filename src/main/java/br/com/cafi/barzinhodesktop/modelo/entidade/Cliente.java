@@ -25,7 +25,13 @@ import lombok.Setter;
 public class Cliente implements Serializable {
     
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+    private String nome;
+    private String numero;
+    private String rua;
+    private String bairro;
+    private String cidade;
+    private String telefone;
     
 }

@@ -9,23 +9,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
-public class ItemVenda implements Serializable {
+public class Fornecedor implements Serializable {
 
-        @Id
-        @GeneratedValue (strategy = GenerationType.AUTO)
-	private long id;
-
-	private Venda venda;
-
-	private Produto produto;
-
-	private double preco;
-
-	private double quantidade;
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)  
+    private long id;
+    private String nome;
+    private String cnpj;
+    private String contato;
 
 }
