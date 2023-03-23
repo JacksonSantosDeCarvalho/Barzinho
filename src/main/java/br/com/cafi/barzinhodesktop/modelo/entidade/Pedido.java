@@ -1,6 +1,7 @@
 package br.com.cafi.barzinhodesktop.modelo.entidade;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,15 +15,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Agendamento implements Serializable {
 
+public class Pedido implements Serializable {
+    
         @Id
-        @GeneratedValue (strategy = GenerationType.AUTO)
+        @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long id;
-	private Cliente cliente;
-	private Date data;
-	private Servico servico;
-	private Usuario prestador;
-	private Usuario usuarioRealizarAgendamento;
+        private String tipo;//balcão, delivery e mesa
+        private String observacao;
+        private Date dataDoPedido;
+        private String status;
+        private Comanda comanda;
+        private Cliente cliente;
 
 }

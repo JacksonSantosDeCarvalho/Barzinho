@@ -30,14 +30,18 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         desktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         cadastrarProdutoMenuItem = new javax.swing.JMenuItem();
+        cadastrarUsuarioMenuItem = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -45,12 +49,16 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        listarUsuarioMenuItem = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
+
+        jMenuItem14.setText("jMenuItem14");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +91,15 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Produtos");
+        jMenu1.setText("Cadastrar");
+
+        jMenuItem6.setText("Cadastrar Comanda");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
 
         cadastrarProdutoMenuItem.setText("Cadastrar Produto");
         cadastrarProdutoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -91,9 +107,26 @@ public class TelaInicial extends javax.swing.JFrame {
                 cadastrarProdutoMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(cadastrarProdutoMenuItem);
+        jMenu1.add(cadastrarProdutoMenuItem);
+
+        cadastrarUsuarioMenuItem.setText("Cadastrar Usuario");
+        cadastrarUsuarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarUsuarioMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(cadastrarUsuarioMenuItem);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Produtos");
 
         jMenuItem7.setText("Listar Produtos");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuItem8.setText("Reposição");
@@ -116,6 +149,18 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu4.add(jMenuItem12);
 
         jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Administrativo");
+
+        listarUsuarioMenuItem.setText("Listar Usuario");
+        listarUsuarioMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarUsuarioMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu5.add(listarUsuarioMenuItem);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu8.setText("Configurações");
 
@@ -146,13 +191,56 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void cadastrarProdutoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoMenuItemActionPerformed
         JInternalFrame jif = new JInternalFrame("Cadastrar Produtos");
-        this.desktopPane.add(jif);
+        this.getDesktopPane().add(jif);
         jif.setVisible(true);
         jif.setBounds(0,0,450,250);
         jif.setClosable(true);
         jif.setResizable(true);
         jif.add(new CadastrarProduto (jif));
     }//GEN-LAST:event_cadastrarProdutoMenuItemActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        JInternalFrame jif = new JInternalFrame("Cadastrar Comandas");
+        jif.setVisible(true);
+        jif.setBounds(0,0,450,250);
+        jif.setClosable(true);
+        jif.setResizable(true);
+        CadastrarComanda cc = new CadastrarComanda(jif);
+        jif.add(cc);
+        getDesktopPane().add(jif);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        JInternalFrame jif = new JInternalFrame("Listar Produto");
+        jif.setBounds(0, 0, 400, 600);
+        jif.setVisible(true);
+        jif.setClosable(true);
+        jif.setResizable(true);
+        ListarProduto obj = new ListarProduto();
+        jif.add(obj);
+        getDesktopPane().add(jif);  
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void cadastrarUsuarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarUsuarioMenuItemActionPerformed
+        JInternalFrame jif = new JInternalFrame("Cadastrar Usuario");
+        this.getDesktopPane().add(jif);
+        jif.setVisible(true);
+        jif.setBounds(0,0,450,250);
+        jif.setClosable(true);
+        jif.setResizable(true);
+        jif.add(new CadastrarUsuario (jif));
+    }//GEN-LAST:event_cadastrarUsuarioMenuItemActionPerformed
+
+    private void listarUsuarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarUsuarioMenuItemActionPerformed
+        JInternalFrame jif = new JInternalFrame("Listar Usuario");
+        jif.setBounds(0, 0, 400, 600);
+        jif.setVisible(true);
+        jif.setClosable(true);
+        jif.setResizable(true);
+        ListarUsuario obj = new ListarUsuario(this, jif);
+        jif.add(obj);
+        getDesktopPane().add(jif);  
+    }//GEN-LAST:event_listarUsuarioMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,10 +279,13 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadastrarProdutoMenuItem;
+    private javax.swing.JMenuItem cadastrarUsuarioMenuItem;
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -202,12 +293,29 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem listarUsuarioMenuItem;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the desktopPane
+     */
+    public javax.swing.JDesktopPane getDesktopPane() {
+        return desktopPane;
+    }
+
+    /**
+     * @param desktopPane the desktopPane to set
+     */
+    public void setDesktopPane(javax.swing.JDesktopPane desktopPane) {
+        this.desktopPane = desktopPane;
+    }
 }

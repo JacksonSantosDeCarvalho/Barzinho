@@ -4,13 +4,102 @@
  */
 package br.com.cafi.barzinhodesktop.visao;
 
+import bo.ProdutoBO;
+import bo.UsuarioBO;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Produto;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Usuario;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jk-Sa
  */
 public class CadastrarProduto extends javax.swing.JPanel {
+
+    /**
+     * @param precoCompraFormattedTextField the precoCompraFormattedTextField to set
+     */
+    public void setPrecoCompraFormattedTextField(javax.swing.JFormattedTextField precoCompraFormattedTextField) {
+        this.precoCompraFormattedTextField = precoCompraFormattedTextField;
+    }
+
+    /**
+     * @param precoVendaFormattedTextField the precoVendaFormattedTextField to set
+     */
+    public void setPrecoVendaFormattedTextField(javax.swing.JFormattedTextField precoVendaFormattedTextField) {
+        this.precoVendaFormattedTextField = precoVendaFormattedTextField;
+    }
+
+    /**
+     * @return the qtEstoqueFormattedTextField
+     */
+    public javax.swing.JFormattedTextField getQtEstoqueFormattedTextField() {
+        return qtEstoqueFormattedTextField;
+    }
+
+    /**
+     * @param qtEstoqueFormattedTextField the qtEstoqueFormattedTextField to set
+     */
+    public void setQtEstoqueFormattedTextField(javax.swing.JFormattedTextField qtEstoqueFormattedTextField) {
+        this.qtEstoqueFormattedTextField = qtEstoqueFormattedTextField;
+    }
+
+    /**
+     * @return the cancelarButton
+     */
+    public javax.swing.JButton getCancelarButton() {
+        return cancelarButton;
+    }
+
+    /**
+     * @return the jFormattedTextField1
+     */
+    public javax.swing.JFormattedTextField getPrecoCompraFormattedTextField() {
+        return precoCompraFormattedTextField;
+    }
+
+    /**
+     * @return the jFormattedTextField2
+     */
+    public javax.swing.JFormattedTextField getPrecoVendaFormattedTextField() {
+        return precoVendaFormattedTextField;
+    }
+
+    /**
+     * @return the jLabel1
+     */
+    public javax.swing.JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    /**
+     * @return the jLabel2
+     */
+    public javax.swing.JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    /**
+     * @return the jLabel3
+     */
+    public javax.swing.JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    /**
+     * @return the jTextField1
+     */
+    public javax.swing.JTextField getDescricaoTextField() {
+        return descricaoTextFiel;
+    }
+
+    /**
+     * @return the salvarButton
+     */
+    public javax.swing.JButton getSalvarButton() {
+        return salvarButton;
+    }
 
 
     /**
@@ -31,36 +120,43 @@ public class CadastrarProduto extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        descricaoTextFiel = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        precoCompraFormattedTextField = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        precoVendaFormattedTextField = new javax.swing.JFormattedTextField();
+        salvarButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        qtEstoqueFormattedTextField = new javax.swing.JFormattedTextField();
 
         jLabel1.setText("Descrição");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        descricaoTextFiel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                descricaoTextFielActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Preço Compra");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        precoCompraFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jLabel3.setText("Preço Venda");
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
+        precoVendaFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        precoVendaFormattedTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField2ActionPerformed(evt);
+                precoVendaFormattedTextFieldActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Salvar");
+        salvarButton.setText("Salvar");
+        salvarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarButtonActionPerformed(evt);
+            }
+        });
 
         cancelarButton.setText("Cancelar");
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +164,10 @@ public class CadastrarProduto extends javax.swing.JPanel {
                 cancelarButtonActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Qt. Estoque");
+
+        qtEstoqueFormattedTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,16 +180,19 @@ public class CadastrarProduto extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(precoCompraFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descricaoTextFiel, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(qtEstoqueFormattedTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(precoVendaFormattedTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jButton1)
-                        .addGap(53, 53, 53)
+                        .addGap(113, 113, 113)
+                        .addComponent(salvarButton)
+                        .addGap(59, 59, 59)
                         .addComponent(cancelarButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -99,44 +202,69 @@ public class CadastrarProduto extends javax.swing.JPanel {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descricaoTextFiel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precoCompraFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precoVendaFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jLabel4)
+                    .addComponent(qtEstoqueFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salvarButton)
                     .addComponent(cancelarButton))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void descricaoTextFielActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descricaoTextFielActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_descricaoTextFielActionPerformed
 
-    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
+    private void precoVendaFormattedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precoVendaFormattedTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField2ActionPerformed
+    }//GEN-LAST:event_precoVendaFormattedTextFieldActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         jif.dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
+    private void salvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarButtonActionPerformed
+           if( !descricaoTextFiel.getText().equals("")
+                && Double.parseDouble(precoCompraFormattedTextField.getText())> 0 
+                   && Double.parseDouble(precoVendaFormattedTextField.getText())> 0 
+                   && Double.parseDouble(qtEstoqueFormattedTextField.getText())> 0){
+            
+                Produto p = new Produto();
+                p.setDescricao(descricaoTextFiel.getText());
+                p.setPrecoCompra(Double.parseDouble(precoCompraFormattedTextField.getText()));
+                p.setPrecoVenda(Double.parseDouble(precoVendaFormattedTextField.getText()));
+                p.setQuantidadeEstoque(Double.parseDouble(qtEstoqueFormattedTextField.getText()));
+                
+                ProdutoBO bo = new ProdutoBO();
+                bo.save(p);
+                 JOptionPane.showMessageDialog(null,"Produto Salvo com sucesso");
+            }
+         
+    }//GEN-LAST:event_salvarButtonActionPerformed
+
     private final JInternalFrame jif;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JTextField descricaoTextFiel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JFormattedTextField precoCompraFormattedTextField;
+    private javax.swing.JFormattedTextField precoVendaFormattedTextField;
+    private javax.swing.JFormattedTextField qtEstoqueFormattedTextField;
+    private javax.swing.JButton salvarButton;
     // End of variables declaration//GEN-END:variables
 }
