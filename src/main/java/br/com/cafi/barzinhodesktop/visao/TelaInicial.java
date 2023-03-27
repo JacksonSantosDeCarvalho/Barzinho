@@ -4,7 +4,11 @@
  */
 package br.com.cafi.barzinhodesktop.visao;
 
+import bo.PermissaoUsuarioBO;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Usuario;
+import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +19,20 @@ public class TelaInicial extends javax.swing.JFrame {
     /**
      * Creates new form TelaInicial
      */
-    public TelaInicial() {
+    public TelaInicial(Usuario usuario) {
         initComponents();
+        this.usuarioLogado=usuario;
+        verificarPermissao();
+    }
+    
+     private void verificarPermissao() {
+        PermissaoUsuarioBO bo = new PermissaoUsuarioBO();
+        cadastrarProdutoMenuItem.setEnabled(bo.usuarioPossuiPermissao(usuarioLogado, "Cadastrar Produto"));
+        cadastrarPermissaoMenuItem.setEnabled(bo.usuarioPossuiPermissao(usuarioLogado, "Cadastrar Permissão"));
+        cadastrarUsuarioMenuItem.setEnabled(bo.usuarioPossuiPermissao(usuarioLogado, "Cadastrar Usuário"));
+        cadastrarComandaMenuItem.setEnabled(bo.usuarioPossuiPermissao(usuarioLogado, "Cadastrar Comanda"));
+        listarProdutoMenuItem.setEnabled(bo.usuarioPossuiPermissao(usuarioLogado, "Listar Produto"));
+        listarUsuarioMenuItem.setEnabled(bo.usuarioPossuiPermissao(usuarioLogado, "Listar Usuário"));
     }
 
     /**
@@ -38,11 +54,12 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        cadastrarComandaMenuItem = new javax.swing.JMenuItem();
         cadastrarProdutoMenuItem = new javax.swing.JMenuItem();
         cadastrarUsuarioMenuItem = new javax.swing.JMenuItem();
+        cadastrarPermissaoMenuItem = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        listarProdutoMenuItem = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -52,7 +69,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         listarUsuarioMenuItem = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        sairMenuItem = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -93,13 +110,13 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastrar");
 
-        jMenuItem6.setText("Cadastrar Comanda");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        cadastrarComandaMenuItem.setText("Cadastrar Comanda");
+        cadastrarComandaMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                cadastrarComandaMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        jMenu1.add(cadastrarComandaMenuItem);
 
         cadastrarProdutoMenuItem.setText("Cadastrar Produto");
         cadastrarProdutoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -117,17 +134,25 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu1.add(cadastrarUsuarioMenuItem);
 
+        cadastrarPermissaoMenuItem.setText("Cadastrar Permissão");
+        cadastrarPermissaoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarPermissaoMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(cadastrarPermissaoMenuItem);
+
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Produtos");
 
-        jMenuItem7.setText("Listar Produtos");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        listarProdutoMenuItem.setText("Listar Produtos");
+        listarProdutoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                listarProdutoMenuItemActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu3.add(listarProdutoMenuItem);
 
         jMenuItem8.setText("Reposição");
         jMenu3.add(jMenuItem8);
@@ -164,8 +189,13 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu8.setText("Configurações");
 
-        jMenuItem13.setText("Sair");
-        jMenu8.add(jMenuItem13);
+        sairMenuItem.setText("Sair");
+        sairMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu8.add(sairMenuItem);
 
         jMenuBar1.add(jMenu8);
 
@@ -199,7 +229,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jif.add(new CadastrarProduto (jif));
     }//GEN-LAST:event_cadastrarProdutoMenuItemActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void cadastrarComandaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarComandaMenuItemActionPerformed
         JInternalFrame jif = new JInternalFrame("Cadastrar Comandas");
         jif.setVisible(true);
         jif.setBounds(0,0,450,250);
@@ -208,9 +238,9 @@ public class TelaInicial extends javax.swing.JFrame {
         CadastrarComanda cc = new CadastrarComanda(jif);
         jif.add(cc);
         getDesktopPane().add(jif);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_cadastrarComandaMenuItemActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void listarProdutoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoMenuItemActionPerformed
         JInternalFrame jif = new JInternalFrame("Listar Produto");
         jif.setBounds(0, 0, 400, 600);
         jif.setVisible(true);
@@ -219,7 +249,7 @@ public class TelaInicial extends javax.swing.JFrame {
         ListarProduto obj = new ListarProduto();
         jif.add(obj);
         getDesktopPane().add(jif);  
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_listarProdutoMenuItemActionPerformed
 
     private void cadastrarUsuarioMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarUsuarioMenuItemActionPerformed
         JInternalFrame jif = new JInternalFrame("Cadastrar Usuario");
@@ -241,6 +271,24 @@ public class TelaInicial extends javax.swing.JFrame {
         jif.add(obj);
         getDesktopPane().add(jif);  
     }//GEN-LAST:event_listarUsuarioMenuItemActionPerformed
+
+    private void sairMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuItemActionPerformed
+        int op = JOptionPane.showConfirmDialog(null, usuarioLogado.getNome()+" deseja sair?");
+        if (op==JOptionPane.YES_OPTION){
+            new TelaLogin().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_sairMenuItemActionPerformed
+
+    private void cadastrarPermissaoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPermissaoMenuItemActionPerformed
+        JInternalFrame jif = new JInternalFrame("Cadastrar Permissão");
+        this.getDesktopPane().add(jif);
+        jif.setVisible(true);
+        jif.setBounds(0,0,450,250);
+        jif.setClosable(true);
+        jif.setResizable(true);
+        jif.add(new CadastrarPermissao (jif));
+    }//GEN-LAST:event_cadastrarPermissaoMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,12 +320,23 @@ public class TelaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaInicial().setVisible(true);
+                new TelaInicial(null).setVisible(true);
             }
         });
     }
+    
+      public JDesktopPane getDesktopPane() {
+        return desktopPane;
+    }
 
+    public void setDesktopPane(JDesktopPane desktopPane) {
+        this.desktopPane = desktopPane;
+    }
+
+    private Usuario usuarioLogado;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cadastrarComandaMenuItem;
+    private javax.swing.JMenuItem cadastrarPermissaoMenuItem;
     private javax.swing.JMenuItem cadastrarProdutoMenuItem;
     private javax.swing.JMenuItem cadastrarUsuarioMenuItem;
     private javax.swing.JDesktopPane desktopPane;
@@ -292,30 +351,19 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem listarProdutoMenuItem;
     private javax.swing.JMenuItem listarUsuarioMenuItem;
+    private javax.swing.JMenuItem sairMenuItem;
     // End of variables declaration//GEN-END:variables
 
     /**
      * @return the desktopPane
      */
-    public javax.swing.JDesktopPane getDesktopPane() {
-        return desktopPane;
-    }
-
-    /**
-     * @param desktopPane the desktopPane to set
-     */
-    public void setDesktopPane(javax.swing.JDesktopPane desktopPane) {
-        this.desktopPane = desktopPane;
-    }
 }

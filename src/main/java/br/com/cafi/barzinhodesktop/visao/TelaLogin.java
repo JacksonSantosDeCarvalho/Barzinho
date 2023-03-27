@@ -4,8 +4,11 @@
  */
 package br.com.cafi.barzinhodesktop.visao;
 
-import br.com.cafi.barzinhodesktop.controle.ControleLogin;
+import bo.UsuarioBO;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Usuario;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -20,9 +23,6 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
-        ControleLogin cl = new ControleLogin(this);
-        fecharButton.addActionListener(cl);
-        entrarButton.addActionListener(cl);
     }
 
     /**
@@ -114,11 +114,36 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarButtonActionPerformed
-        // TODO add your handling code here:
+       verificarLogin();
     }//GEN-LAST:event_entrarButtonActionPerformed
 
+     private void verificarLogin (){
+                // 1 pegar o conteudo do formulário
+        String login = loginTextField.getText();
+        String senha = new String (senhaPasswordField.getPassword());
+         // instanciar um bo
+         UsuarioBO bo = new UsuarioBO();
+        // chamar o metodo utilizando os dados do foormulároi
+        Usuario u = bo.getUsuarioByLoginSenha(login, senha);
+        // se o objeto for nulo, tá errado 
+        if (u==null){
+            JOptionPane.showMessageDialog(null, "Usuário ou senha incorrreto.");
+        }
+        //se for diferente de nulo tá legal! Entra na tela inicial e fecha a de login
+        else{
+             new TelaInicial(u).setVisible(true);
+             this.dispose();
+        }
+    }
+     
+    private void senhaPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {                                              
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+           verificarLogin();
+       }
+    } 
+    
     private void senhaPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaPasswordFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_senhaPasswordFieldActionPerformed
 
     /**

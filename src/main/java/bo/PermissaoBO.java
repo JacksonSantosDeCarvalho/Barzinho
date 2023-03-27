@@ -4,82 +4,92 @@
  */
 package bo;
 
+import br.com.cafi.barzinhodesktop.modelo.dao.PermissaoDAO;
 import br.com.cafi.barzinhodesktop.modelo.dao.SimpleEntityManager;
-import br.com.cafi.barzinhodesktop.modelo.dao.UsuarioDAO;
-import br.com.cafi.barzinhodesktop.modelo.entidade.Usuario;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Permissao;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
  *
- * @author Aluno
+ * @author Jk-Sa
  */
-public class UsuarioBO {
-    private UsuarioDAO dao;
+public class PermissaoBO {
     
-    private final SimpleEntityManager simpleEntityManager;
-     
-     
-    public UsuarioBO(){
+     private PermissaoDAO dao;
+
+    private SimpleEntityManager simpleEntityManager;
+
+    public PermissaoBO() {
         this.simpleEntityManager = new SimpleEntityManager("HELDERnomeDoPersistence");
-        dao = new UsuarioDAO(simpleEntityManager.getEntityManager());
+        dao = new PermissaoDAO(simpleEntityManager.getEntityManager());
     }
-     
-    public Usuario save(Usuario usuario){
-        try{
+
+    public void save(Permissao usuario) {
+        try {
             simpleEntityManager.beginTransaction();
             dao.save(usuario);
             simpleEntityManager.commit();
-            return usuario;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             simpleEntityManager.rollBack();
-            return null;
         }
     }
-     
-    public List<Usuario> findAll(){
-        return dao.findAll();
-    }
-    
-      public void update(Usuario usuario){
-        try{
+
+    public void update(Permissao usuario) {
+        try {
             simpleEntityManager.beginTransaction();
             dao.update(usuario);
             simpleEntityManager.commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             simpleEntityManager.rollBack();
         }
     }
-    
-    public void delete (Usuario u){
-        try{
+
+    public List<Permissao> findAll() {
+        return dao.findAll();
+    }
+
+    public void delete(Permissao u) {
+        try {
             simpleEntityManager.beginTransaction();
             dao.delete(u);
             simpleEntityManager.commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             simpleEntityManager.rollBack();
         }
     }
-    
-      public Usuario getById(long id){
+
+    public Permissao getById(long id) {
         return dao.getById(id);
     }
-      
-    public Usuario getUsuarioByLoginSenha(String login, String senha) {
+
+    public List<Permissao> getListPermissaoOrdenadoNome() {
         Query query = dao.getEntityManager().createQuery(
-                "From Usuario where login = ?1 and senha = ?2"
+                "From Permissao order by descricao asc"
         );
-        query.setParameter(1, login);
-        query.setParameter(2, senha);
         try {
-            return (Usuario) query.getSingleResult();
+            return  query.getResultList();
         } catch (NoResultException e) {
             e.printStackTrace();
             return null;
         }
     }
+    
+    public Permissao getPermissaoByDescricao(String descricao){
+        Query query = dao.getEntityManager().createQuery(
+                "From Permissao where descricao = ?1"
+        );
+        query.setParameter(1, descricao);
+        try {
+            return  (Permissao) query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
 }

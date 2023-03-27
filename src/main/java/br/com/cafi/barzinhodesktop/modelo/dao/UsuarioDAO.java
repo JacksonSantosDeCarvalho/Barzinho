@@ -8,7 +8,7 @@ public class UsuarioDAO extends DAO<Long, Usuario> {
         super(entityManager);
     }
 
-    public Usuario getById(int id) {
+    public Usuario getById(long id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
