@@ -1,0 +1,1023 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package br.com.cafi.barzinhodesktop.visao;
+
+import bo.ClienteBO;
+import bo.ItemPedidoBO;
+import bo.PedidoBO;
+import bo.ProdutoBO;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Cliente;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Comanda;
+import br.com.cafi.barzinhodesktop.modelo.entidade.ItemPedido;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Pedido;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Produto;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Jk-Sa
+ */
+public class Delivery extends javax.swing.JPanel {
+
+    /**
+     * @return the jif
+     */
+    public JInternalFrame getJif() {
+        return jif;
+    }
+
+    /**
+     * @param jif the jif to set
+     */
+    public void setJif(JInternalFrame jif) {
+        this.jif = jif;
+    }
+
+    /**
+     * @return the comanda
+     */
+    public Comanda getComanda() {
+        return comanda;
+    }
+
+    /**
+     * @param comanda the comanda to set
+     */
+    public void setComanda(Comanda comanda) {
+        this.comanda = comanda;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the pedido
+     */
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    /**
+     * @param pedido the pedido to set
+     */
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    /**
+     * @return the produtoSelecinado
+     */
+    public Produto getProdutoSelecinado() {
+        return produtoSelecinado;
+    }
+
+    /**
+     * @param produtoSelecinado the produtoSelecinado to set
+     */
+    public void setProdutoSelecinado(Produto produtoSelecinado) {
+        this.produtoSelecinado = produtoSelecinado;
+    }
+
+    /**
+     * @return the lista
+     */
+    public List<Produto> getLista() {
+        return lista;
+    }
+
+    /**
+     * @param lista the lista to set
+     */
+    public void setLista(List<Produto> lista) {
+        this.lista = lista;
+    }
+
+    /**
+     * @return the listaItemPedido
+     */
+    public List<ItemPedido> getListaItemPedido() {
+        return listaItemPedido;
+    }
+
+    /**
+     * @param listaItemPedido the listaItemPedido to set
+     */
+    public void setListaItemPedido(List<ItemPedido> listaItemPedido) {
+        this.listaItemPedido = listaItemPedido;
+    }
+
+    private JInternalFrame jif;
+    private Comanda comanda;
+    private Cliente cliente;
+    private Pedido pedido;
+    private Produto produtoSelecinado;
+
+    public Delivery(JInternalFrame jif, Pedido pedido) {
+        initComponents();
+        this.jif = jif;
+        this.pedido = pedido;
+        carregarTabela();
+        carregarTabelaItemPedido();
+        totalTextField.setText(pedido.getObservacao());
+    }
+
+    private List<Produto> lista;
+
+    private void carregarTabela() {
+        limparTabela();
+        ProdutoBO bo = new ProdutoBO();
+        setLista(bo.findAll());
+        DefaultTableModel model
+                = (DefaultTableModel) getjTable1().getModel();
+        for (Produto obj : getLista()) {
+            model.addRow(new Object[]{obj.getId(), obj.getDescricao(),
+                obj.getPrecoVenda()});
+        }
+    }
+
+    private void limparTabela() {
+        DefaultTableModel model
+                = (DefaultTableModel) getjTable1().getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(0);
+        }
+    }
+
+    private void limparTabelaItem() {
+        DefaultTableModel model
+                = (DefaultTableModel) getjTable2().getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(0);
+        }
+    }
+
+    private List<ItemPedido> listaItemPedido;
+
+    private void carregarTabelaItemPedido() {
+        limparTabelaItem();
+        ItemPedidoBO bo = new ItemPedidoBO();
+
+        setListaItemPedido(bo.findWhere(getPedido().getId()));
+
+        DefaultTableModel model
+                = (DefaultTableModel) getjTable2().getModel();
+        for (ItemPedido obj : getListaItemPedido()) {
+            model.addRow(new Object[]{obj.getId(), obj.getProduto().getDescricao(),
+                obj.getPedido().getId(), obj.getQuantidade(), obj.getPreco()});
+        }
+
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        produtoTextField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        totalTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        pagamentoTextField = new javax.swing.JTextField();
+        trocoTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        codigoProdutoTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        qntTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        nomeTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        barrioTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        ruaTextField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        TelefoneTextField = new javax.swing.JTextField();
+        numeroTextField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+
+        jLabel1.setText("Produto");
+
+        jButton1.setText("Deletar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        totalTextField.setEditable(false);
+        totalTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Total");
+
+        jLabel3.setText("Pagamento");
+
+        pagamentoTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pagamentoTextFieldKeyPressed(evt);
+            }
+        });
+
+        trocoTextField.setEditable(false);
+        trocoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                trocoTextFieldActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Produto", "Preço"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton2.setText("Fechar Conta");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Código");
+
+        codigoProdutoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoProdutoTextFieldActionPerformed(evt);
+            }
+        });
+        codigoProdutoTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                codigoProdutoTextFieldKeyReleased(evt);
+            }
+        });
+
+        jLabel6.setText("qnt");
+
+        qntTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                qntTextFieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                qntTextFieldKeyReleased(evt);
+            }
+        });
+
+        jLabel5.setText("Troco");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Produto", "Pedido", "Quantidade", "Preço"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel7.setText("Nome");
+
+        jLabel8.setText("Bairro");
+
+        jLabel9.setText("Rua");
+
+        jLabel10.setText("Telefone");
+
+        jLabel11.setText("N°");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton1)
+                        .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(barrioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(ruaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numeroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(TelefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(codigoProdutoTextField)
+                    .addComponent(produtoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(totalTextField)
+                    .addComponent(qntTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(trocoTextField)
+                    .addComponent(pagamentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(95, 95, 95))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(nomeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(barrioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(ruaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(TelefoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(codigoProdutoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(qntTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(totalTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(produtoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(pagamentoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(trocoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jButton2))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(66, 66, 66))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover?");
+        if (opcao == JOptionPane.YES_OPTION) {
+            DefaultTableModel model
+                    = (DefaultTableModel) getjTable2().getModel();
+            long id = (long) model.getValueAt(getjTable2().getSelectedRow(), 0);
+            ItemPedidoBO bo = new ItemPedidoBO();
+            ItemPedido ip = bo.getById(id);
+            getPedido().setObservacao((Float.parseFloat(getPedido().getObservacao()) - ip.getPreco()) + "");
+            PedidoBO pbo = new PedidoBO();
+            pbo.update(getPedido());
+            bo.delete(ip);
+
+        }
+        getTotalTextField().setText(getPedido().getObservacao());
+        carregarTabelaItemPedido();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void totalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalTextFieldActionPerformed
+
+    }//GEN-LAST:event_totalTextFieldActionPerformed
+
+    private void pagamentoTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pagamentoTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!"0".equals(pagamentoTextField.getText())) {
+                getTrocoTextField().setText((Float.parseFloat(getPagamentoTextField().getText()) - Float.parseFloat(getPedido().getObservacao())) + "");
+            }
+
+        }
+
+    }//GEN-LAST:event_pagamentoTextFieldKeyPressed
+
+    private void trocoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trocoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trocoTextFieldActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        getPedido().setStatus("Saiu para entrega");
+        PedidoBO pbo = new PedidoBO();
+        pbo.update(getPedido());
+        this.getJif().dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void codigoProdutoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoProdutoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoProdutoTextFieldActionPerformed
+
+    private void codigoProdutoTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigoProdutoTextFieldKeyReleased
+
+        Long idProduto = Long.parseLong(getCodigoProdutoTextField().getText());
+        ProdutoBO bo = new ProdutoBO();
+        setProdutoSelecinado(bo.getById(idProduto));
+        getProdutoTextField().setText(getProdutoSelecinado().getDescricao());
+    }//GEN-LAST:event_codigoProdutoTextFieldKeyReleased
+
+    private void qntTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qntTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (getProdutoSelecinado() != null && !"0".equals(qntTextField.getText())
+                    && !"".equals(nomeTextField.getText())
+                    && !"".equals(barrioTextField.getText())
+                    && !"".equals(ruaTextField.getText())
+                    && !"".equals(numeroTextField.getText())
+                    && !"".equals(TelefoneTextField.getText())) {
+
+                Cliente c = new Cliente();
+                c.setNome(getNomeTextField().getText());
+                c.setBairro(getBarrioTextField().getText());
+                c.setRua(getRuaTextField().getText());
+                c.setNumero(getNumeroTextField().getText());
+                c.setTelefone(getTelefoneTextField().getText());
+
+                ClienteBO cbo = new ClienteBO();
+                cbo.save(c);
+
+                getPedido().setCliente(c);
+                PedidoBO pbo = new PedidoBO();
+                pbo.update(getPedido());
+
+                ItemPedido ip = new ItemPedido();
+                ip.setPedido(getPedido());
+                ip.setProduto(getProdutoSelecinado());
+                ip.setQuantidade(Float.parseFloat(getQntTextField().getText()));
+                ip.setPreco((float) (getProdutoSelecinado().getPrecoVenda() * ip.getQuantidade()));
+
+                if ("".equals(getTotalTextField().getText())) {
+                    getTotalTextField().setText(ip.getPreco() + "");
+
+                } else {
+                    getTotalTextField().setText(((Float.parseFloat(getTotalTextField().getText())) + ip.getPreco()) + "");
+
+                }
+
+                ItemPedidoBO bo = new ItemPedidoBO();
+                bo.save(ip);
+                carregarTabelaItemPedido();
+                setProdutoSelecinado(null);
+
+            }
+
+        }
+        getPedido().setObservacao(getTotalTextField().getText());
+        PedidoBO pbo = new PedidoBO();
+        pbo.update(getPedido());
+    }//GEN-LAST:event_qntTextFieldKeyPressed
+
+    private void qntTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qntTextFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_qntTextFieldKeyReleased
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TelefoneTextField;
+    private javax.swing.JTextField barrioTextField;
+    private javax.swing.JTextField codigoProdutoTextField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField nomeTextField;
+    private javax.swing.JTextField numeroTextField;
+    private javax.swing.JTextField pagamentoTextField;
+    private javax.swing.JTextField produtoTextField;
+    private javax.swing.JTextField qntTextField;
+    private javax.swing.JTextField ruaTextField;
+    private javax.swing.JTextField totalTextField;
+    private javax.swing.JTextField trocoTextField;
+    // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the codigoProdutoTextField
+     */
+    public javax.swing.JTextField getCodigoProdutoTextField() {
+        return codigoProdutoTextField;
+    }
+
+    /**
+     * @param codigoProdutoTextField the codigoProdutoTextField to set
+     */
+    public void setCodigoProdutoTextField(javax.swing.JTextField codigoProdutoTextField) {
+        this.codigoProdutoTextField = codigoProdutoTextField;
+    }
+
+    /**
+     * @return the jButton1
+     */
+    public javax.swing.JButton getjButton1() {
+        return jButton1;
+    }
+
+    /**
+     * @param jButton1 the jButton1 to set
+     */
+    public void setjButton1(javax.swing.JButton jButton1) {
+        this.jButton1 = jButton1;
+    }
+
+    /**
+     * @return the jButton2
+     */
+    public javax.swing.JButton getjButton2() {
+        return jButton2;
+    }
+
+    /**
+     * @param jButton2 the jButton2 to set
+     */
+    public void setjButton2(javax.swing.JButton jButton2) {
+        this.jButton2 = jButton2;
+    }
+
+    /**
+     * @return the jLabel1
+     */
+    public javax.swing.JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    /**
+     * @param jLabel1 the jLabel1 to set
+     */
+    public void setjLabel1(javax.swing.JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    /**
+     * @return the jLabel10
+     */
+    public javax.swing.JLabel getjLabel10() {
+        return jLabel10;
+    }
+
+    /**
+     * @param jLabel10 the jLabel10 to set
+     */
+    public void setjLabel10(javax.swing.JLabel jLabel10) {
+        this.jLabel10 = jLabel10;
+    }
+
+    /**
+     * @return the jLabel2
+     */
+    public javax.swing.JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    /**
+     * @param jLabel2 the jLabel2 to set
+     */
+    public void setjLabel2(javax.swing.JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    /**
+     * @return the jLabel3
+     */
+    public javax.swing.JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    /**
+     * @param jLabel3 the jLabel3 to set
+     */
+    public void setjLabel3(javax.swing.JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    /**
+     * @return the jLabel4
+     */
+    public javax.swing.JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    /**
+     * @param jLabel4 the jLabel4 to set
+     */
+    public void setjLabel4(javax.swing.JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    /**
+     * @return the jLabel5
+     */
+    public javax.swing.JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    /**
+     * @param jLabel5 the jLabel5 to set
+     */
+    public void setjLabel5(javax.swing.JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    /**
+     * @return the jLabel6
+     */
+    public javax.swing.JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    /**
+     * @param jLabel6 the jLabel6 to set
+     */
+    public void setjLabel6(javax.swing.JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    /**
+     * @return the jLabel7
+     */
+    public javax.swing.JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    /**
+     * @param jLabel7 the jLabel7 to set
+     */
+    public void setjLabel7(javax.swing.JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    /**
+     * @return the jLabel8
+     */
+    public javax.swing.JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    /**
+     * @param jLabel8 the jLabel8 to set
+     */
+    public void setjLabel8(javax.swing.JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+    /**
+     * @return the jLabel9
+     */
+    public javax.swing.JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    /**
+     * @param jLabel9 the jLabel9 to set
+     */
+    public void setjLabel9(javax.swing.JLabel jLabel9) {
+        this.jLabel9 = jLabel9;
+    }
+
+    /**
+     * @return the jScrollPane1
+     */
+    public javax.swing.JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    /**
+     * @param jScrollPane1 the jScrollPane1 to set
+     */
+    public void setjScrollPane1(javax.swing.JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    /**
+     * @return the jScrollPane2
+     */
+    public javax.swing.JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    /**
+     * @param jScrollPane2 the jScrollPane2 to set
+     */
+    public void setjScrollPane2(javax.swing.JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    /**
+     * @return the jTable1
+     */
+    public javax.swing.JTable getjTable1() {
+        return jTable1;
+    }
+
+    /**
+     * @param jTable1 the jTable1 to set
+     */
+    public void setjTable1(javax.swing.JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
+    /**
+     * @return the jTable2
+     */
+    public javax.swing.JTable getjTable2() {
+        return jTable2;
+    }
+
+    /**
+     * @param jTable2 the jTable2 to set
+     */
+    public void setjTable2(javax.swing.JTable jTable2) {
+        this.jTable2 = jTable2;
+    }
+
+    /**
+     * @return the jTextField1
+     */
+    public javax.swing.JTextField getjTextField1() {
+        return getNomeTextField();
+    }
+
+    /**
+     * @param jTextField1 the jTextField1 to set
+     */
+    public void setjTextField1(javax.swing.JTextField jTextField1) {
+        this.setNomeTextField(jTextField1);
+    }
+
+    /**
+     * @return the jTextField2
+     */
+    public javax.swing.JTextField getjTextField2() {
+        return getBarrioTextField();
+    }
+
+    /**
+     * @param jTextField2 the jTextField2 to set
+     */
+    public void setjTextField2(javax.swing.JTextField jTextField2) {
+        this.setBarrioTextField(jTextField2);
+    }
+
+    /**
+     * @return the jTextField3
+     */
+    public javax.swing.JTextField getjTextField3() {
+        return getRuaTextField();
+    }
+
+    /**
+     * @param jTextField3 the jTextField3 to set
+     */
+    public void setjTextField3(javax.swing.JTextField jTextField3) {
+        this.setRuaTextField(jTextField3);
+    }
+
+    /**
+     * @return the jTextField4
+     */
+    public javax.swing.JTextField getjTextField4() {
+        return getTelefoneTextField();
+    }
+
+    /**
+     * @param jTextField4 the jTextField4 to set
+     */
+    public void setjTextField4(javax.swing.JTextField jTextField4) {
+        this.setTelefoneTextField(jTextField4);
+    }
+
+    /**
+     * @return the pagamentoTextField
+     */
+    public javax.swing.JTextField getPagamentoTextField() {
+        return pagamentoTextField;
+    }
+
+    /**
+     * @param pagamentoTextField the pagamentoTextField to set
+     */
+    public void setPagamentoTextField(javax.swing.JTextField pagamentoTextField) {
+        this.pagamentoTextField = pagamentoTextField;
+    }
+
+    /**
+     * @return the produtoTextField
+     */
+    public javax.swing.JTextField getProdutoTextField() {
+        return produtoTextField;
+    }
+
+    /**
+     * @param produtoTextField the produtoTextField to set
+     */
+    public void setProdutoTextField(javax.swing.JTextField produtoTextField) {
+        this.produtoTextField = produtoTextField;
+    }
+
+    /**
+     * @return the qntTextField
+     */
+    public javax.swing.JTextField getQntTextField() {
+        return qntTextField;
+    }
+
+    /**
+     * @param qntTextField the qntTextField to set
+     */
+    public void setQntTextField(javax.swing.JTextField qntTextField) {
+        this.qntTextField = qntTextField;
+    }
+
+    /**
+     * @return the totalTextField
+     */
+    public javax.swing.JTextField getTotalTextField() {
+        return totalTextField;
+    }
+
+    /**
+     * @param totalTextField the totalTextField to set
+     */
+    public void setTotalTextField(javax.swing.JTextField totalTextField) {
+        this.totalTextField = totalTextField;
+    }
+
+    /**
+     * @return the trocoTextField
+     */
+    public javax.swing.JTextField getTrocoTextField() {
+        return trocoTextField;
+    }
+
+    /**
+     * @param trocoTextField the trocoTextField to set
+     */
+    public void setTrocoTextField(javax.swing.JTextField trocoTextField) {
+        this.trocoTextField = trocoTextField;
+    }
+
+    /**
+     * @return the TelefoneTextField
+     */
+    public javax.swing.JTextField getTelefoneTextField() {
+        return TelefoneTextField;
+    }
+
+    /**
+     * @param TelefoneTextField the TelefoneTextField to set
+     */
+    public void setTelefoneTextField(javax.swing.JTextField TelefoneTextField) {
+        this.TelefoneTextField = TelefoneTextField;
+    }
+
+    /**
+     * @return the barrioTextField
+     */
+    public javax.swing.JTextField getBarrioTextField() {
+        return barrioTextField;
+    }
+
+    /**
+     * @param barrioTextField the barrioTextField to set
+     */
+    public void setBarrioTextField(javax.swing.JTextField barrioTextField) {
+        this.barrioTextField = barrioTextField;
+    }
+
+    /**
+     * @return the jLabel11
+     */
+    public javax.swing.JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    /**
+     * @param jLabel11 the jLabel11 to set
+     */
+    public void setjLabel11(javax.swing.JLabel jLabel11) {
+        this.jLabel11 = jLabel11;
+    }
+
+    /**
+     * @return the nomeTextField
+     */
+    public javax.swing.JTextField getNomeTextField() {
+        return nomeTextField;
+    }
+
+    /**
+     * @param nomeTextField the nomeTextField to set
+     */
+    public void setNomeTextField(javax.swing.JTextField nomeTextField) {
+        this.nomeTextField = nomeTextField;
+    }
+
+    /**
+     * @return the numeroTextField
+     */
+    public javax.swing.JTextField getNumeroTextField() {
+        return numeroTextField;
+    }
+
+    /**
+     * @param numeroTextField the numeroTextField to set
+     */
+    public void setNumeroTextField(javax.swing.JTextField numeroTextField) {
+        this.numeroTextField = numeroTextField;
+    }
+
+    /**
+     * @return the ruaTextField
+     */
+    public javax.swing.JTextField getRuaTextField() {
+        return ruaTextField;
+    }
+
+    /**
+     * @param ruaTextField the ruaTextField to set
+     */
+    public void setRuaTextField(javax.swing.JTextField ruaTextField) {
+        this.ruaTextField = ruaTextField;
+    }
+}

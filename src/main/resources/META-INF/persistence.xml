@@ -8,7 +8,20 @@
 		<!-- Implementação do JPA, no nessa caso Hibernate -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Aqui são listadas todas as entidades -->
-		<class></class>
+                <class/>
+		<class>br.combr.com.cafi.barzinhodesktop.modelo.entidade.Cliente</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Comanda</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.FluxoFinanceiro</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Fornecedor</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.FornecedorProduto</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Insumo</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.InsumoProduto</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.ItemPedido</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Pedido</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Permissao</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.PermissaoUsuario</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Produto</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.Usuario</class>
 		<properties>
 			<!-- Propriedades JDBC -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

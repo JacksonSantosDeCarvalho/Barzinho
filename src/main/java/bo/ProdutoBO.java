@@ -34,6 +34,18 @@ public class ProdutoBO {
         }
     }
     
+    public void update(Produto produto) {
+        try {
+            simpleEntityManager.beginTransaction();
+            dao.update(produto);
+            simpleEntityManager.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            simpleEntityManager.rollBack();
+        }
+
+    }
+    
       public void delete(Produto obj){
         try{
             simpleEntityManager.beginTransaction();

@@ -4,6 +4,15 @@
  */
 package br.com.cafi.barzinhodesktop.visao;
 
+import bo.MesaBO;
+import bo.PedidoBO;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Comanda;
+import br.com.cafi.barzinhodesktop.modelo.entidade.Pedido;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JInternalFrame;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jk-Sa
@@ -13,8 +22,33 @@ public class MesaComanda extends javax.swing.JPanel {
     /**
      * Creates new form MesaComanda
      */
-    public MesaComanda() {
+    public MesaComanda(JInternalFrame jif, TelaInicial tl) {
         initComponents();
+        carregarTabela();
+        this.jif = jif;
+        this.tl = tl;
+    }
+
+    private List<Comanda> lista;
+
+    private void carregarTabela() {
+        limparTabela();
+        MesaBO bo = new MesaBO();
+        lista = bo.findAll();
+        DefaultTableModel model
+                = (DefaultTableModel) jTable1.getModel();
+        for (Comanda obj : lista) {
+            model.addRow(new Object[]{obj.getId(), obj.getNome(),
+                obj.isStatus() ? "Ocupado" : "livre"});
+        }
+    }
+
+    private void limparTabela() {
+        DefaultTableModel model
+                = (DefaultTableModel) jTable1.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(0);
+        }
     }
 
     /**
@@ -26,42 +60,24 @@ public class MesaComanda extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        pedidoButton = new javax.swing.JButton();
 
-        jButton1.setText("Mesa1");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+            },
+            new String [] {
+                "Codigo", "Nome", "Status"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
-        jButton2.setText("Mesa2");
-
-        jButton3.setText("Mesa3");
-
-        jButton4.setText("Mesa4");
-
-        jButton5.setText("Mesa5");
-
-        jButton6.setText("Mesa6");
-
-        jButton7.setText("Mesa7");
-
-        jButton8.setText("Mesa8");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        pedidoButton.setText("Realizar Pedido");
+        pedidoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                pedidoButtonActionPerformed(evt);
             }
         });
 
@@ -69,72 +85,81 @@ public class MesaComanda extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                        .addGap(79, 79, 79)
+                        .addComponent(pedidoButton)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5)
-                            .addComponent(jButton6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
-                            .addComponent(jButton8))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pedidoButton)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void pedidoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoButtonActionPerformed
+        DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+        Long idComanda = Long.parseLong(dm.getValueAt(jTable1.getSelectedRow(), 0) + "");
+        MesaBO bo = new MesaBO();
+        Comanda comanda = bo.getById(idComanda);
+
+        if (comanda.isStatus() == false) {
+            comanda.setStatus(true);
+            MesaBO Mbo = new MesaBO();
+            Mbo.update(comanda);
+            Pedido p = new Pedido();
+            p.setDataDoPedido(new Date(System.currentTimeMillis()));
+            p.setComanda(comanda);
+            PedidoBO Pbo = new PedidoBO();
+
+            Pbo.save(p);
+
+            JInternalFrame jif = new JInternalFrame("Cadastrar Comandas");
+            jif.setVisible(true);
+            jif.setBounds(0, 0, 805, 540);
+            jif.setClosable(true);
+            jif.setResizable(true);
+            CadastrarPedido cc = new CadastrarPedido(jif, comanda, p);
+            jif.add(cc);
+            tl.getDesktopPane().add(jif);
+            this.jif.dispose();
+        } else {
+            PedidoBO boP = new PedidoBO();
+            
+            List<Pedido> l = boP.findWhere(comanda.getId());
+
+            Long idPedido = l.get(0).getId();
+
+            Pedido p = boP.getById(idPedido);
+
+            JInternalFrame jif = new JInternalFrame("Cadastrar Comandas");
+            jif.setVisible(true);
+            jif.setBounds(0, 0, 805, 540);
+            jif.setClosable(true);
+            jif.setResizable(true);
+            CadastrarPedido cc = new CadastrarPedido(jif, comanda, p);
+            jif.add(cc);
+            tl.getDesktopPane().add(jif);
+            this.jif.dispose();
+        }
 
 
+    }//GEN-LAST:event_pedidoButtonActionPerformed
+
+    private TelaInicial tl;
+    private JInternalFrame jif;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton pedidoButton;
     // End of variables declaration//GEN-END:variables
 }

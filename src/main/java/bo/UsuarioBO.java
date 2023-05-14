@@ -8,6 +8,8 @@ import br.com.cafi.barzinhodesktop.modelo.dao.SimpleEntityManager;
 import br.com.cafi.barzinhodesktop.modelo.dao.UsuarioDAO;
 import br.com.cafi.barzinhodesktop.modelo.entidade.Usuario;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,14 +26,16 @@ public class UsuarioBO {
         dao = new UsuarioDAO(simpleEntityManager.getEntityManager());
     }
      
-    public void save(Usuario usuario){
+    public Usuario save(Usuario usuario){
         try{
             simpleEntityManager.beginTransaction();
             dao.save(usuario);
             simpleEntityManager.commit();
+            return usuario;
         }catch(Exception e){
             e.printStackTrace();
             simpleEntityManager.rollBack();
+            return null;
         }
     }
      
@@ -63,5 +67,19 @@ public class UsuarioBO {
     
       public Usuario getById(long id){
         return dao.getById(id);
+    }
+      
+    public Usuario getUsuarioByLoginSenha(String login, String senha) {
+        Query query = dao.getEntityManager().createQuery(
+                "From Usuario where login = ?1 and senha = ?2"
+        );
+        query.setParameter(1, login);
+        query.setParameter(2, senha);
+        try {
+            return (Usuario) query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
