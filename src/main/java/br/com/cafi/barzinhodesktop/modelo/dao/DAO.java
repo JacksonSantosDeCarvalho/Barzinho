@@ -3,6 +3,7 @@ package br.com.cafi.barzinhodesktop.modelo.dao;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  * @author Hélder
@@ -12,7 +13,6 @@ public class DAO<PK, T> {
     /**
      * @return the entityManager
      */
-
     private EntityManager entityManager;
 
     public DAO(EntityManager entityManager) {
@@ -29,6 +29,7 @@ public class DAO<PK, T> {
     }
 
     public void update(T entity) {
+
         entityManager.merge(entity);
     }
 
@@ -39,6 +40,15 @@ public class DAO<PK, T> {
     public List<T> findAll() {
         return entityManager.createQuery(("FROM " + getTypeClass().getName()))
                 .getResultList();
+    }
+
+    public List<T> findWhere(String sql, String[] parametros) {
+        Query q = entityManager.createQuery(("FROM " + getTypeClass().getName() + " where " + sql));
+        for (int i = 0; i < parametros.length; i++) {
+            q.setParameter(i + 1, parametros[i]);
+        }
+
+        return q.getResultList();
     }
 
     private Class<?> getTypeClass() {

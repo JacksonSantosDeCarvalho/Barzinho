@@ -127,6 +127,8 @@ public class CadastrarUsuario extends javax.swing.JPanel {
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        persmissoesPanel.setAutoscrolls(true);
+
         javax.swing.GroupLayout persmissoesPanelLayout = new javax.swing.GroupLayout(persmissoesPanel);
         persmissoesPanel.setLayout(persmissoesPanelLayout);
         persmissoesPanelLayout.setHorizontalGroup(

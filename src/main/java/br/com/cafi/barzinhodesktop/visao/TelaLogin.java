@@ -43,7 +43,7 @@ public class TelaLogin extends javax.swing.JFrame {
         fecharButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Salão solft - Login");
+        setTitle("Barzinho - Login");
         setResizable(false);
 
         jLabel1.setText("Login");
@@ -54,6 +54,11 @@ public class TelaLogin extends javax.swing.JFrame {
         entrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entrarButtonActionPerformed(evt);
+            }
+        });
+        entrarButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                entrarButtonKeyPressed(evt);
             }
         });
 
@@ -136,15 +141,16 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }
      
-    private void senhaPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {                                              
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-           verificarLogin();
-       }
-    } 
     
     private void senhaPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaPasswordFieldActionPerformed
 
     }//GEN-LAST:event_senhaPasswordFieldActionPerformed
+
+    private void entrarButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_entrarButtonKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+           verificarLogin();
+       }
+    }//GEN-LAST:event_entrarButtonKeyPressed
 
     /**
      * @param args the command line arguments

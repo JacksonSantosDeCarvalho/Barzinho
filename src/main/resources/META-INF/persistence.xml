@@ -16,6 +16,7 @@
                 <class>br.com.cafi.barzinhodesktop.modelo.entidade.FornecedorProduto</class>
                 <class>br.com.cafi.barzinhodesktop.modelo.entidade.Insumo</class>
                 <class>br.com.cafi.barzinhodesktop.modelo.entidade.InsumoProduto</class>
+                <class>br.com.cafi.barzinhodesktop.modelo.entidade.ItemPedido</class>
                 <class>br.com.cafi.barzinhodesktop.modelo.entidade.Pedido</class>
                 <class>br.com.cafi.barzinhodesktop.modelo.entidade.Permissao</class>
                 <class>br.com.cafi.barzinhodesktop.modelo.entidade.PermissaoUsuario</class>
